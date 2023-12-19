@@ -80,6 +80,36 @@ vector<int> bfsQueue(node* root) {
 
 }
 
+void levelOrder(node* lvl) {
+    if(lvl == nullptr) {
+        return;
+    }
+
+    queue<node*> nav;
+    nav.push(lvl);
+    int size = 1;
+    int layer = 1;
+
+    cout << "Level Order is as follows: ";
+    while(!nav.empty()){
+        cout << "\nNodes on level " << layer << " are..." << endl;
+        while(size > 0) {
+            cout << nav.front()->val << " ";
+            if(nav.front()->left != nullptr) {
+                nav.push(nav.front()->left);
+            }
+            if(nav.front()->right != nullptr) {
+                nav.push(nav.front()->right);
+            }
+            nav.pop();
+            size--;
+            layer++;
+        }
+
+        size = nav.size();
+    }
+}
+
 int main() {
 
     node* root = new node(0);
@@ -125,6 +155,8 @@ int main() {
     }
 
     cout << "\nAll order type traversals are basically dfs except level order." << endl;
+
+    levelOrder(root);
 
 
 }
